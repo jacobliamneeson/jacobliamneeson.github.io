@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varicose Vein Procedure Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .progress-container {
+            width: 100%;
+            background-color: #f3f3f3;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            margin-top: 20px;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 30px;
+            background-color: #4caf50;
+            border-radius: 25px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Varicose Vein Procedure Timer</h1>
+<p>Enter the leg length in centimeters:</p>
+<input type="number" id="legLength" min="1">
+<button onclick="startProgress()">START</button>
+
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<script>
+    function startProgress() {
+        const legLength = document.getElementById('legLength').value;
+        if (legLength && legLength > 0) {
+            const totalTime = legLength * 5; // total time in seconds
+            const progressBar = document.getElementById('progressBar');
+            let width = 0;
+            const interval = setInterval(frame, totalTime * 10); // interval for smooth progress
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                } else {
+                    width++;
+                    progressBar.style.width = width + '%';
+                }
+            }
+        } else {
+            alert("Please enter a valid leg length.");
+        }
+    }
+</script>
+
+</body>
+</html>
